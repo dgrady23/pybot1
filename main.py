@@ -1,4 +1,4 @@
-from keep_alive import keep_alive
+
 import discord
 import os
 import json
@@ -23,5 +23,4 @@ async def on_message(message):
         await message.channel.send('Hello!')
 
 
-keep_alive()
 client.run(os.getenv('TOKEN'))
