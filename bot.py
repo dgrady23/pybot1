@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 TOKEN = os.getenv("TOKEN")
 
-DISCORD_SERVER = "EventServer"
+DISCORD_SERVER = os.getenv("Events_Servers")
 intents = discord.Intents.default()
 intents.message_content = True
 client = discord.Client(intents=intents)
