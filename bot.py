@@ -1,9 +1,17 @@
+import discord
+import os
 from discord.ext import commands
 from discord import utils as discord_utils
+from dotenv import load_dotenv
+load_dotenv()
+TOKEN = os.getenv("TOKEN")
 
-DISCORD_TOKEN  = "{TOKEN}"
 DISCORD_SERVER = "EventServer"
-bot = commands.Bot(command_prefix="!")
+intents = discord.Intents.default()
+intents.message_content = True
+client = discord.Client(intents=intents)
+bot = commands.Bot(intents=intents, command_prefix="!")
+
 
 @bot.event
 async def on_ready():
@@ -20,25 +28,23 @@ async def hello(ctx):
 
 @bot.command(name="del")
 async def delete(ctx, number: int):
-    messages = await ctx.channel.history(limit=number + 1).flatten()f
+    messages = await ctx.channel.history(limit=number + 1).flatten()
     for each_message in messages:
         await each_message.delete()
 
 @bot.command("poll")
 async def show_poll(ctx, *args):
-    # polls can only be sent from the 'admins' channel
-    if ctx.channel.name != "admins":
-        return
     # poll command:
     # !poll event_name event_date
     event_name = args[0]
     event_date = args[1]
     # retrieving the 'events' channel
-    events_channel = discord_utils.get(ctx.guild.channels, name="events")
+    ctx.channel = discord_utils.get(ctx.guild.channels)
     # sending the poll
-    message = await events_channel.send(f"@everyone Will you come to the **{event_name}** event the **{event_date}**?")
+    message = await ctx.channel.send(f"@everyone Will you come to the **{event_name}** event the **{event_date}**?")
     # adding reactions to the poll
     await message.add_reaction('U00002705')
     await message.add_reaction('U0000274C')
+    
 
-bot.run(DISCORD_TOKEN)
+bot.run(TOKEN)
