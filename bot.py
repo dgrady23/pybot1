@@ -33,15 +33,14 @@ async def delete(ctx, number: int):
         await each_message.delete()
 
 @bot.command("poll")
-async def show_poll(ctx, *args):
+async def poll(ctx, *args):
     # poll command:
     # !poll event_name event_date
     event_name = args[0]
     event_date = args[1]
     # retrieving the 'events' channel
-    ctx.channel = discord_utils.get(ctx.guild.channels)
     # sending the poll
-    message = await ctx.channel.send(f"@everyone Will you come to the **{event_name}** event the **{event_date}**?")
+    message = await ctx.send(f"@everyone Will you come to the **{event_name}** event the **{event_date}**?")
     # adding reactions to the poll
     await message.add_reaction('U00002705')
     await message.add_reaction('U0000274C')
