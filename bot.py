@@ -40,9 +40,10 @@ async def poll(ctx, *args):
     event_date = args[1]
     # retrieving the 'events' channel
     # sending the poll
-    await ctx.send(f"@everyone Will you come to the **{event_name}** event the **{event_date}**?")
+    message=await ctx.send(f"@everyone Will you come to the **{event_name}** event the **{event_date}**?")
     # adding reactions to the poll
-   
+    await message.add_reaction('✔️')
+    await message.add_reaction('❌')
     
 
 bot.run(TOKEN)
