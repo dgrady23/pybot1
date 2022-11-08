@@ -42,8 +42,8 @@ async def poll(ctx, *args):
     # sending the poll
     message = await ctx.send(f"@everyone Will you come to the **{event_name}** event the **{event_date}**?")
     # adding reactions to the poll
-    await message.add_reaction('U00002705')
-    await message.add_reaction('U0000274C')
+    await message.add_reaction(':white_check_mark:')
+    await message.add_reaction(':x:')
     
 
 bot.run(TOKEN)
