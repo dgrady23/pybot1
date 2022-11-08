@@ -26,11 +26,7 @@ async def hello(ctx):
         return
     await ctx.send(f"Hello {ctx.author.mention}!")
 
-@bot.command(name="del")
-async def delete(ctx, number: int):
-    messages = await ctx.channel.history(limit=number + 1).flatten()
-    for each_message in messages:
-        await each_message.delete()
+
 
 @bot.command("poll")
 async def poll(ctx, *args):
